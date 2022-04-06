@@ -1,3 +1,5 @@
+import java.io.File
+
 /**
  * Description:
  * Created by small small su
@@ -49,16 +51,35 @@ fun main() {
     123.mLet {
         it
     }
+
+    val r: File = File("D:\\").mApply {
+        setExecutable(true)
+        this
+    }
 }
 
+// TODO: 2022/4/5 let 的源码学习
 //private 私有化
 //inline  我们的函数是高阶函数，所以用到内联,使用lambda优化，性能提高
 // fun<I,O> 函数中两个范型 ，I 是输入 ，
 // I.mLet 对I输入进行函数扩展，扩展函数名称是mLet，意味着所有类型，都可以用 xxx.mLet
 // lambda:(I 输入) ->O  输出
-// :O 会根据用户的返回类型 变化而变化
+// :O 会根据用户 lambda 的返回类型 变化而变化
 // lambda(this) I 进行函数扩展，在整个扩展函数里面，this == I本身
+// 匿名函数里面持有的是 it == info 本身
 private inline fun <I, O> I.mLet(lambda: (I) -> O): O = lambda(this)
+
+// TODO: 2022/4/5 apply 的源码学习
+//对万能类型的扩展
+// inline 进行优化高阶函数 lambda，提高性能
+// fun <INPUT> 函数中声明一个范型
+// INPUT.mApply 范型扩展，所有类型都可以 xxx.myApply
+// ⚠️INPUT.() -> Unit 让我们匿名函数里面都持有this，返回类型是空;在lambda里面不需要返回值，因为永远都是返回INPUT本身
+// 调用 lambda（this） 默认就有this。return this 是为了链式调用
+private inline fun <I> I.mApply(lambda: I.() -> Unit): I {
+    lambda()
+    return this
+}
 
 /**
  * todo ----------------------------- P118
@@ -76,7 +97,9 @@ private inline fun <I, O> I.mLet(lambda: (I) -> O): O = lambda(this)
  *
  */
 
-// TODO: 2022/4/5 apply 的源码学习
+
+
+
 
 
 
