@@ -60,16 +60,7 @@ in 逆变，可以看作是协变的镜像 相当于Java中的super
  *
  *
   */
-
-
-
-
-
-
-
-
-
-
+const val filePath = "/Users/surao/Desktop/解压密码.txt"
 
 fun main(args: Array<String>) {
     println("Hello World!")
