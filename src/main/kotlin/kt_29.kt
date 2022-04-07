@@ -28,7 +28,7 @@ inline fun Context.apply5(lambda: Context.(String) -> Unit): Context {
 
 //applyFile 进行DSL 规则
 inline fun File.applyFile(action: (String, String?) -> Unit): File {
-    action(name, readLine())
+    action(name, readLines()[0])
     return this
 }
 
