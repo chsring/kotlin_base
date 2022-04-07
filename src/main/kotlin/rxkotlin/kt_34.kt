@@ -1,4 +1,4 @@
-package shizhan
+package rxkotlin
 
 /**
  * Description:
@@ -18,7 +18,7 @@ inline fun <O> create(action: () -> O): RxJavaCoreObject<O> {
     return RxJavaCoreObject<O>(action())
 }
 
-//中转站函数扩展 ，保存我们的记录
+//中转站函数扩展 ，保存我们的记录。 map 的输入元 就是create的输出元，map的输出元 就是最后一行
 inline fun <I, O> RxJavaCoreObject<I>.map(lambda: (I) -> O): RxJavaCoreObject<O>/* 链式*/ {
     return RxJavaCoreObject(lambda(value))
 }
